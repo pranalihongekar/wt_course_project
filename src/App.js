@@ -1,5 +1,5 @@
 import './App.css';
-import logo from './kle_logo.png';
+import { Outlet, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <br/><br/>
         <input type='button' value='Login' class='button'/>
       </form>
-
+      
     </body>
   );
 }

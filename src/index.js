@@ -2,7 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Homepage from './pages/Homepage.js';
 import reportWebVitals from './reportWebVitals';
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+export default function first() {
+  return (
+    <BrowserRouter>
+      <Routes>
+          <Route path="homepage" element={<Homepage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
