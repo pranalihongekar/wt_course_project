@@ -1,32 +1,37 @@
 import './App.css';
-import { Outlet, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from 'react-router-dom';
 
-function App() {
-  return (
-    <body>
-      <div class='parent'>
+import React, { Component } from 'react';
 
-        <div class='child1'>
-          <img src={require('./kle_logo2.png')} class='logo'></img>
-        </div>
+import Homepage from './pages/Homepage';
+import Login from './pages/Login';
 
-        <div class='child2'>
-          <h1>Community Website For Students</h1>
-          <h1>Login page:</h1>
-        </div>
-
-      </div>
-
-      <form>
-        <label>Username: </label><input type='text' class='text'/>
-        <br/>
-        <label>Password: </label><input type='password' class='text'/>
-        <br/><br/>
-        <input type='button' value='Login' class='button'/>
-      </form>
-      
-    </body>
-  );
+class App extends Component {
+  render() {
+    return (
+       <Router>
+           <div className="App">
+            <ul className="App-header">
+              <li>
+                <Link to="/Login">Login</Link>
+              </li>
+              <li>
+                <Link to="/Homepage">Homepage</Link>
+              </li>
+            </ul>
+           <Routes>
+                 <Route exact path='/Login' element={< Login />}></Route>
+                 <Route exact path='/Homepage' element={< Homepage />}></Route>
+          </Routes>
+          </div>
+       </Router>
+   );
+  }
 }
-
+  
 export default App;
