@@ -1,7 +1,7 @@
 function Query() {
     return (
 
-    <h2>This is infomation page</h2>
+    <h2>This is Query page</h2>
 
     );
 }

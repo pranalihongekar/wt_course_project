@@ -1,9 +1,37 @@
 import './App.css';
 
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
+import axios from "axios";
 
-import Homepage from './pages/Homepage';
+import Homepage from './Homepage';
+import About from './About';
+import Query from './Query';
+
+axios.get("http://localhost:3002/api/get")
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
+
+axios.post("http://localhost:3002/api/post", {
+  username: 'Fred',
+  password: 'Flintstone'
+})
+.then(function (response) {
+  console.log(response);
+})
+.catch(function (error) {
+  console.log(error);
+});
+
 
 class App extends Component {
   render() {
@@ -31,17 +59,14 @@ class App extends Component {
         </form>
 
         <Router>
-          <div className="App">
-            <ul className="App-header">
-              <li>
-                <Link to="/Homepage">Homepage</Link>
-              </li>
-            </ul>
-            <Routes>
-              <Route exact path='/Homepage' element={< Homepage />}></Route>
-            </Routes>
-          </div>
-         </Router>
+          <Link to="/Homepage">Homepage</Link>
+
+          <Routes>
+            <Route exact path='/Homepage' element={< Homepage />}></Route>
+            <Route exact path='/about' element={< About />}></Route>
+            <Route exact path='/query' element={< Query />}></Route>
+          </Routes>
+        </Router>
 
       </body>
     );
