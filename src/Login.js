@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
 import axios from "axios";
+import './Login.css';
 
 function Login() {
 
@@ -47,14 +48,15 @@ function Login() {
     }
     return (
         <body>
-            <div class='bg-color2'>
+            <div class='bg-color2' style={{height:"100vh"}}>
             <div>
+                <br/>
                 <h1>Login page:</h1>
                 <br/><br/>
             </div>
 
             <form>
-                <div class="form-group h4">
+                <div className="form-group h4">
                     <label>Username: </label>
                     <input type='text' class="form-control" id='username' />
                     <br />

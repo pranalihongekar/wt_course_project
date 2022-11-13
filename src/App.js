@@ -23,21 +23,23 @@ class App extends Component {
           <Router>
             <div class='row'>
 
-              <div class='col-sm-4'>
+              <div class='col-sm-3'>
                 <img src={require('./kle_logo2.png')} class='logo'></img>
               </div>
 
-              <div class='col-sm-4'>
+              <div class='col-sm-6 h4'>
                 <h1>Community Website For Students</h1>
               </div>
 
-              <div class='col-sm-4'>
-                <Link to="/Login">Login</Link><br />
-                <Link to="/Register">Signup</Link><br />
-                <Link to="/About">About us</Link><br />
+              <div class='col-sm-3 h4'>
+                <br/>
+                <Link to="/Login">Login</Link><br /><br />
+                <Link to="/Register">Signup</Link><br /><br />
+                <Link to="/About">About us</Link><br /><br />
               </div>
             </div>
             <Routes>
+                  <Route exact path='/' element={< About />}></Route>
                   <Route exact path='/Login' element={< Login />}></Route>
                   <Route exact path='/about' element={< About />}></Route>
                   <Route exact path='/register' element={< Register />}></Route>
