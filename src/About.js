@@ -1,7 +1,7 @@
 function About() {
     return (
         <body>
-            <div class='bg-color2' style={{ height: "100vh" }}>
+            <div class='bg-color2' style={{ height: "80vh" }}>
                 <div>
                     <br />
                     <h1>Welcome to the student disscussion forum</h1>
@@ -18,6 +18,14 @@ function About() {
                     </div>
                 </div>
             </div>
+            <footer class='footer'>
+                <div class='row'>
+                    <div class='col-sm-4'>Developed by: Sankalp, Soumya, Pranavi, Shri Nagahari</div>
+                    <div class='col-sm-4'></div>
+                    <div class='col-sm-4'>KLE Technological University, Hubli - 580030</div>
+                </div>
+
+            </footer>
         </body>
 
     );
