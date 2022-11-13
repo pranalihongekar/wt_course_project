@@ -1,30 +1,7 @@
 .logo
 {
   margin: 5%;
-  width: 30%;
-}
-
-.parent
-{
-  display: flex;
-}
-
-.child1
-{
-  flex: 1;
-}
-
-.child2
-{
-  flex: 2;
-  margin-right: 20%;
-}
-
-
-h1
-{
-  text-align: center;
-  
+  width: 20%;
 }
 
 form
@@ -39,6 +16,60 @@ form
   opacity: 100%;
   backdrop-filter: blur(8px);
 }
+
+.bg-color
+{
+  background-color: bisque;
+}
+
+.bg-color2
+{
+  background-color: cadetblue;
+}
+
+body
+{
+  min-height: 100vh;
+}
+
+.form-group
+{
+  padding: 20px;
+}
+
+/*
+
+
+ 
+.parent
+{
+  display: flex;
+}
+
+.child1
+{
+  flex: 1;
+}
+
+.child2
+{
+  flex: 2;
+  
+}
+
+.child3
+{
+  flex: 3;
+  margin-right: 20%;
+}
+
+h1
+{
+  text-align: center;
+  
+}
+
+
 
 label,.text
 {
@@ -58,14 +89,9 @@ label,.text
   border-radius: 10px;
 }
 
-body
-{
-  min-height: 100vh;
-  background-color: antiquewhite;
-}
 
 
 
 
 
-
+ */

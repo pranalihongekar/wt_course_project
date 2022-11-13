@@ -1,96 +1,51 @@
 import './App.css';
 
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, Outlet } from 'react-router-dom';
 import axios from "axios";
 
-import Homepage from './Homepage';
 import About from './About';
-import Query from './Query';
-
-
+import Login from './Login';
+import Register from './Register';
 
 class App extends Component {
   render() {
 
-    function validate() {
-
-      axios.get("http://localhost:3002/api/get")
-        .then(function (response) {
-          var username, password, x, y, status, i;
-
-          x = document.getElementById('username').value;
-          y = document.getElementById('password').value;
-
-          for (i = 0; i < response.data.length; i++) 
-          {
-            username = response.data[i].username;
-            password = response.data[i].password;
-
-            if (x == username && y == password) {
-              status = 0;
-            }
-
-            else {
-              status = 1;
-            }
-          }
-
-          if (status == 0) {
-            alert("Login successful.");
-          }
-
-          else {
-            alert("login failed. Invalid credentials.")
-          }
-
-
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-        });
-
-    }
-
     return (
+      <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+        </head>
 
-      <body>
+        <body>
+          <div class='text-center bg-color'>
+          <Router>
+            <div class='row'>
 
-        <div class='parent'>
+              <div class='col-sm-4'>
+                <img src={require('./kle_logo2.png')} class='logo'></img>
+              </div>
 
-          <div class='child1'>
-            <img src={require('./kle_logo2.png')} class='logo'></img>
-          </div>
+              <div class='col-sm-4'>
+                <h1>Community Website For Students</h1>
+              </div>
 
-          <div class='child2'>
-            <h1>Community Website For Students</h1>
-            <h1>Login page:</h1>
-          </div>
-        </div>
-
-        <form>
-          <label>Username: </label><input type='text' class='text' id='username' />
-          <br />
-          <label>Password: </label><input type='password' class='text' id='password' />
-          <br /><br />
-          <input type='button' value='Login' class='button' onClick={validate} />
-        </form>
-
-        {/* <Router>
-          <Link to="/Homepage">Homepage</Link>
-
-          <Routes>
-            <Route exact path='/Homepage' element={< Homepage />}></Route>
-            <Route exact path='/about' element={< About />}></Route>
-            <Route exact path='/query' element={< Query />}></Route>
-          </Routes>
-        </Router> */}
-
-      </body>
+              <div class='col-sm-4'>
+                <Link to="/Login">Login</Link><br />
+                <Link to="/Register">Signup</Link><br />
+                <Link to="/About">About us</Link><br />
+              </div>
+            </div>
+            <Routes>
+                  <Route exact path='/Login' element={< Login />}></Route>
+                  <Route exact path='/about' element={< About />}></Route>
+                  <Route exact path='/register' element={< Register />}></Route>
+                </Routes>
+            </Router>
+            </div>
+        </body>
+      </html>
     );
   }
 }
