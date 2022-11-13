@@ -76,7 +76,7 @@ function Register() {
                 </form>
             </div>
 
-            <footer class='footer'>
+            <footer class='footer navbar-fixed-bottom'>
                 <div class='row'>
                     <div class='col-sm-4'>Developed by: Sankalp, Soumya, Pranavi, Shri Nagahari</div>
                     <div class='col-sm-4'></div>
