@@ -18,8 +18,10 @@ app.get("/api/get", (req,res)=>{
 app.post("/api/post", (req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
+    const branch = req.body.branch;
+    const usn = req.body.usn;
 
-    db.query("INSERT INTO login (username, password) VALUES (?,?)",[username,password], (err,result)=>{
+    db.query("INSERT INTO login (username, password, branch, usn) VALUES (?,?,?,?)",[username,password,branch,usn], (err,result)=>{
     if(err) {
     console.log(err)
     } 

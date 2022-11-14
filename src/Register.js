@@ -5,44 +5,27 @@ import './Register.css';
 
 function Register() {
     function validate() {
+        
+        var username, password, p,q,r,s, status, i;
 
-        axios.get("http://localhost:3002/api/get")
-            .then(function (response) {
-                var username, password, x, y, status, i;
+        p = document.getElementById('username').value;
+        q = document.getElementById('password1').value;
+        r = document.getElementById('branch').value;
+        s = document.getElementById('usn').value;
 
-                x = document.getElementById('username').value;
-                y = document.getElementById('password').value;
-
-                for (i = 0; i < response.data.length; i++) {
-                    username = response.data[i].username;
-                    password = response.data[i].password;
-
-                    if (x == username && y == password) {
-                        status = 0;
-                    }
-
-                    else {
-                        status = 1;
-                    }
-                }
-
-                if (status == 0) {
-                    alert("Login successful.");
-                }
-
-                else {
-                    alert("login failed. Invalid credentials.")
-                }
-
-
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .finally(function () {
-                // always executed
-            });
+        axios.post("http://localhost:3002/api/post", 
+        {
+            username: p,
+            password: q,
+            branch: r,
+            usn: s
+        })
+        .then(function (response) {
+            alert(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
     }
     return (
@@ -54,24 +37,25 @@ function Register() {
                     <br /><br />
                 </div>
 
-                <form class='register-form'>
+                <form class='register-form' onSubmit={validate}>
                     <div className="form-group h4">
                         <label>Username: </label>
-                        <input type='text' class="form-control" id='username' />
+                        <input type='text' class="form-control" id='username' required/> 
+                        {/* pattern="[A-Za-z]{3}" */}
                         <br />
                         <label>Password: </label>
-                        <input type='password' class="form-control" id='password1' />
+                        <input type='password' class="form-control" id='password1' required/>
                         <br />
                         <label>Re enter Password: </label>
-                        <input type='password' class="form-control" id='password2' />
+                        <input type='password' class="form-control" id='password2' required/>
                         <br />
                         <label>Branch: </label>
-                        <input type='password' class="form-control" id='branch' />
+                        <input type='text' class="form-control" id='branch' required/>
                         <br />
                         <label>USN: </label>
-                        <input type='password' class="form-control" id='usn' />
+                        <input type='text' class="form-control" id='usn' required/>
                         <br /><br />
-                        <input type='button' value='Signup' class='btn btn-default' onClick={validate} />
+                        <input type='submit' value='Signup' class='btn btn-default' />
                     </div>
                 </form>
             </div>

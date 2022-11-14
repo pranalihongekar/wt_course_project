@@ -9,7 +9,7 @@ function Login() {
 
         axios.get("http://localhost:3002/api/get")
             .then(function (response) {
-                var username, password, x, y, status, i;
+                var username, password, x, y, status=1, i;
 
                 x = document.getElementById('username').value;
                 y = document.getElementById('password').value;
@@ -20,10 +20,6 @@ function Login() {
 
                     if (x == username && y == password) {
                         status = 0;
-                    }
-
-                    else {
-                        status = 1;
                     }
                 }
 
@@ -55,15 +51,15 @@ function Login() {
                 <br/><br/>
             </div>
 
-            <form>
+            <form onSubmit={validate}>
                 <div className="form-group h4">
                     <label>Username: </label>
-                    <input type='text' class="form-control" id='username' />
+                    <input type='text' class="form-control" id='username' required/>
                     <br />
                     <label>Password: </label>
-                    <input type='password' class="form-control"  id='password' />
+                    <input type='password' class="form-control"  id='password' required/>
                     <br /><br />
-                    <input type='button' value='Login' class='btn btn-default' onClick={validate} />
+                    <input type='submit' value='Login' class='btn btn-default'/>
                 </div>
             </form>
 
