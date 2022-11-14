@@ -7,6 +7,7 @@ import axios from "axios";
 import About from './About';
 import Login from './Login';
 import Register from './Register';
+import Query from './Query';
 
 class App extends Component {
   render() {
@@ -43,6 +44,7 @@ class App extends Component {
                   <Route exact path='/Login' element={< Login />}></Route>
                   <Route exact path='/about' element={< About />}></Route>
                   <Route exact path='/register' element={< Register />}></Route>
+                  <Route exact path='/query' element={< Query />}></Route>
                 </Routes>
             </Router>
             </div>

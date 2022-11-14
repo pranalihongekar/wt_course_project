@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './Login.css';
+import About from './About';
 
 function Login() {
-
-    function validate() {
-
+    
+    function Validate() {
+        
         axios.get("http://localhost:3002/api/get")
             .then(function (response) {
                 var username, password, x, y, status=1, i;
@@ -25,6 +26,7 @@ function Login() {
 
                 if (status == 0) {
                     alert("Login successful.");
+                 
                 }
 
                 else {
@@ -51,7 +53,7 @@ function Login() {
                 <br/><br/>
             </div>
 
-            <form onSubmit={validate}>
+            <form onSubmit={Validate}>
                 <div className="form-group h4">
                     <label>Username: </label>
                     <input type='text' class="form-control" id='username' required/>
