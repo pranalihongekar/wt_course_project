@@ -6,8 +6,7 @@ function Query() {
 
         <body>
             <h2>This is Query page</h2>
-
-
+            
         </body >
     );
 }

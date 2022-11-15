@@ -32,7 +32,7 @@ class App extends Component {
                 <h1>Community Website For Students</h1>
               </div>
 
-              <div class='col-sm-3 h4'>
+              <div class='col-sm-3 h4' id='links'>
                 <br/>
                 <Link to="/Login">Login</Link><br /><br />
                 <Link to="/Register">Signup</Link><br /><br />

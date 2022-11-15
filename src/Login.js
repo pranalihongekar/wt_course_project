@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './Login.css';
-import About from './About';
+import Query from './Query';
 
 function Login() {
-    
+    let navigate = useNavigate();
+
+    const navigateToQuery = () => {
+        navigate('/Query');
+        navigate(0);
+    };
+
     function Validate() {
         
         axios.get("http://localhost:3002/api/get")
@@ -26,7 +32,7 @@ function Login() {
 
                 if (status == 0) {
                     alert("Login successful.");
-                 
+                    navigateToQuery(); 
                 }
 
                 else {
