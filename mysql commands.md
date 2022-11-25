@@ -1,12 +1,11 @@
 create table userDetails
 (
-USN varchar(30),
+USN varchar(30) primary key,
 fname varchar(30) not null,
 lname varchar(30) not null,
 password varchar(30) not null,
 branch varchar(30) not null,
-email varchar(50) unique not null,
-primary key(USN)
+email varchar(50) unique not null
 );
 
 create table tag
@@ -21,10 +20,10 @@ create table questions
 qId int(30) auto_increment,
 question varchar(1000),
 user varchar(30),
-tag varchar(30) not null,
+tagId int(30) not null,
+primary key(qId),
 foreign key (user) references userDetails(USN),
-
-primary key(qId)
+foreign key (tagId) references tag(tagId)
 );
 
 create table answers
@@ -32,7 +31,7 @@ create table answers
 aId int(30) primary key,
 user varchar(30), 
 answer varchar(10000),
-qId varchar(30), 
+qId int(30),
 foreign key (user) references userDetails(USN),
 foreign key (qId) references questions(qId)
 );
@@ -44,3 +43,18 @@ article varchar(1024),
 user varchar(30),
 foreign key (user) references userDetails(USN)
 );
+
+alter table userDetails engine=innodb;
+alter table questions engine=innodb;
+alter table tag engine=innodb;
+alter table answers engine=innodb;
+alter table article engine=innodb;
+
+drop table userDetails;
+drop table questions;
+drop table tag;
+drop table questions;
+drop table answers;
+drop table article;
+
+![Getting Started](./schema.jpg)
