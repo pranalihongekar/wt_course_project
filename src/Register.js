@@ -6,57 +6,36 @@ import './Register.css';
 function Register() {
     function validate() {
 
-        var username, usn, p, q, r, s, t, status, i;
+        var username, usn, fname, lname, password1, password2, branch, email, status, i;
 
-        p = document.getElementById('username').value;
-        q = document.getElementById('password1').value;
-        t = document.getElementById('password2').value;
-        r = document.getElementById('branch').value;
-        s = document.getElementById('usn').value;
+        usn = document.getElementById('usn').value;
+        password1 = document.getElementById('password1').value;
+        password2 = document.getElementById('password2').value;
+        fname = document.getElementById('fname').value;
+        lname = document.getElementById('lname').value;
+        branch = document.getElementById('branch').value;
+        email = document.getElementById('email').value;
 
-        if (t == q) {
-            axios.get("http://localhost:3002/api/get")
+
+        if (password1 == password2) {
+           
+            axios.post("http://localhost:3002/api/post",
+                {
+                    usn:usn,
+                    fname:fname,
+                    lname:lname,
+                    password:password1,
+                    branch:branch,
+                    email: email
+                })
                 .then(function (response) {
-                    for (i = 0; i < response.data.length; i++) {
-                        username = response.data[i].username;
-                        usn = response.data[i].usn;
-
-                        if (p == username && s == usn) {
-                            status = 0;
-                            alert("User already exits. dd");
-                        }
-                        else {
-                            status = 1;
-                        }
-                    }
+                    alert("Registration successful");
                 })
                 .catch(function (error) {
-                    // handle error
+                    alert("Registration failed. Check the credentials and try again.");
                     console.log(error);
-                })
-                .finally(function () {
-                    // always executed
                 });
 
-            if (status == 0) {
-                alert("User already exits.");
-            }
-            else if (status == 1) {
-                alert("Registration successful");
-                axios.post("http://localhost:3002/api/post",
-                    {
-                        username: p,
-                        password: q,
-                        branch: r,
-                        usn: s
-                    })
-                    .then(function (response) {
-                        alert(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
 
 
         }
@@ -77,8 +56,8 @@ function Register() {
 
                 <form class='register-form' onSubmit={validate}>
                     <div className="form-group h4">
-                        <label>Username: </label>
-                        <input type='text' class="form-control" id='username' required />
+                        <label>USN: </label>
+                        <input type='text' class="form-control" id='usn' required />
                         {/* pattern="[A-Za-z]{3}" */}
                         <br />
                         <label>Password: </label>
@@ -87,13 +66,20 @@ function Register() {
                         <label>Re enter Password: </label>
                         <input type='password' class="form-control" id='password2' required />
                         <br />
+                        <label>First name: </label>
+                        <input type='text' class="form-control" id='fname' required />
+                        <br />
+                        <label>Last name: </label>
+                        <input type='text' class="form-control" id='lname' required />
+                        <br />
                         <label>Branch: </label>
                         <input type='text' class="form-control" id='branch' required />
                         <br />
-                        <label>USN: </label>
-                        <input type='text' class="form-control" id='usn' required />
+                        <label>Email id: </label>
+                        <input type='text' class="form-control" id='email' required />
                         <br /><br />
                         <input type='submit' value='Signup' class='btn btn-default' />
+                        <br /><br /><br /><br /><br /><br />
                     </div>
                 </form>
             </div>

@@ -22,7 +22,7 @@ function Login() {
                 y = document.getElementById('password').value;
 
                 for (i = 0; i < response.data.length; i++) {
-                    username = response.data[i].username;
+                    username = response.data[i].USN;
                     password = response.data[i].password;
 
                     if (x == username && y == password) {

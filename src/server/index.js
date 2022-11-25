@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json())
 
 app.get("/api/get", (req,res)=>{
-    db.query("SELECT * FROM login", (err,result)=>{
+    db.query("SELECT * FROM userDetails", (err,result)=>{
         if(err) {
         console.log(err)
         } 
@@ -16,12 +16,15 @@ app.get("/api/get", (req,res)=>{
     });   });
 
 app.post("/api/post", (req,res)=>{
-    const username = req.body.username;
+    const usn = req.body.usn;
+    const fname = req.body.fname;
+    const lname = req.body.lname;
     const password = req.body.password;
     const branch = req.body.branch;
-    const usn = req.body.usn;
+    const email = req.body.email;
 
-    db.query("INSERT INTO login (username, password, branch, usn) VALUES (?,?,?,?)",[username,password,branch,usn], (err,result)=>{
+
+    db.query("INSERT INTO userDetails (USN, fname, lname, password, branch, email) VALUES (?,?,?,?,?,?)",[usn,fname,lname,password,branch,email], (err,result)=>{
     if(err) {
     console.log(err)
     } 
