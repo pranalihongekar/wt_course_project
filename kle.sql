@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Nov 25, 2022 at 08:18 PM
+-- Generation Time: Nov 25, 2022 at 08:45 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.12
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `kle`
 --
-CREATE DATABASE IF NOT EXISTS `kle` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `kle`;
 
 -- --------------------------------------------------------
 
@@ -33,13 +31,13 @@ USE `kle`;
 DROP TABLE IF EXISTS `answers`;
 CREATE TABLE IF NOT EXISTS `answers` (
   `aId` int(30) NOT NULL,
-  `user` varchar(30) DEFAULT NULL,
-  `answer` varchar(10000) DEFAULT NULL,
+  `user` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `answer` varchar(10000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `qId` int(30) DEFAULT NULL,
   PRIMARY KEY (`aId`),
   KEY `qId` (`qId`),
   KEY `user` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50,38 +48,11 @@ CREATE TABLE IF NOT EXISTS `answers` (
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `articleId` int(30) NOT NULL,
-  `article` varchar(1024) DEFAULT NULL,
-  `user` varchar(30) DEFAULT NULL,
+  `article` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `user` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`articleId`),
   KEY `user` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login`
---
-
-DROP TABLE IF EXISTS `login`;
-CREATE TABLE IF NOT EXISTS `login` (
-  `username` varchar(30) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL,
-  `branch` varchar(30) DEFAULT NULL,
-  `usn` varchar(30) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `login`
---
-
-INSERT INTO `login` (`username`, `password`, `branch`, `usn`) VALUES
-('sankalp', 'password', 'cs', '414'),
-('sankalp', 'password', 'cs', '414'),
-('asd', 'asd', 'asd', 'asd'),
-('ss', 'ss', 'ss', 'ss'),
-('sankalp', 'dfsdf', 'sd', 'dd'),
-('s', 's', 's', 's'),
-('asd', 'asd', 'asd', 'asd');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -92,13 +63,13 @@ INSERT INTO `login` (`username`, `password`, `branch`, `usn`) VALUES
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE IF NOT EXISTS `questions` (
   `qId` int(30) NOT NULL AUTO_INCREMENT,
-  `question` varchar(1000) DEFAULT NULL,
-  `user` varchar(30) DEFAULT NULL,
+  `question` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `user` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `tagId` int(30) NOT NULL,
   PRIMARY KEY (`qId`),
   KEY `tagId` (`tagId`),
   KEY `user` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -109,9 +80,9 @@ CREATE TABLE IF NOT EXISTS `questions` (
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
   `tagId` int(11) NOT NULL AUTO_INCREMENT,
-  `tagName` varchar(30) NOT NULL,
+  `tagName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`tagId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -121,15 +92,15 @@ CREATE TABLE IF NOT EXISTS `tag` (
 
 DROP TABLE IF EXISTS `userdetails`;
 CREATE TABLE IF NOT EXISTS `userdetails` (
-  `USN` varchar(30) NOT NULL,
-  `fname` varchar(30) NOT NULL,
-  `lname` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL,
-  `branch` varchar(30) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `USN` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fname` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `lname` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `branch` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`USN`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `userdetails`
