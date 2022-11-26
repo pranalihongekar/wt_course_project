@@ -11,9 +11,9 @@ function Login() {
         navigate('/Query');
         navigate(0);
     };
-    ``
+
     function Validate() {
-        
+        var tempUsername;
         axios.get("http://localhost:3002/api/get")
             .then(function (response) {
                 var username, password, x, y, status=1, i;
@@ -27,6 +27,7 @@ function Login() {
 
                     if (x == username && y == password) {
                         status = 0;
+                        tempUsername=username;
                     }
                 }
 
@@ -39,6 +40,16 @@ function Login() {
                     alert("login failed. Invalid credentials.")
                 }
 
+                axios.post("http://localhost:3002/api/login",
+                {
+                    usn:tempUsername
+                })
+                .then(function (response) {
+                    alert("Update executed");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
             })
             .catch(function (error) {
@@ -48,6 +59,8 @@ function Login() {
             .finally(function () {
                 // always executed
             });
+
+            
 
     }
     return (
