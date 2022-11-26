@@ -11,7 +11,7 @@ function Login() {
         navigate('/Query');
         navigate(0);
     };
-
+    ``
     function Validate() {
         
         axios.get("http://localhost:3002/api/get")
