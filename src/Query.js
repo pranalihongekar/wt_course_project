@@ -1,21 +1,58 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import './Login.css';
 
 function Query() {
+
+    let navigate = useNavigate();
+
+    const navigateToLogin = () => {
+        navigate('/login');
+        navigate(0);
+    };
+
+    axios.get("http://localhost:3002/api/get")
+        .then(function (response) {
+            var loginStatus, USN, i, status = 0;
+
+            for (i = 0; i < response.data.length; i++) {
+                loginStatus = response.data[i].login_status;
+
+                if (loginStatus == 1) {
+                    USN = response.data[i].USN;
+                    status = 1;
+                }
+            }
+            if(status==0)
+            {
+                navigateToLogin();
+                alert("Login to enter query page.");
+            }
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .finally(function () {
+            // always executed
+        });
+
+
     return (
 
         <body>
             <h2>This is Query page</h2>
 
-        <div >
-            <div>
-                Select categories
-            </div>
+            <div >
+                <div>
+                    Select categories
+                </div>
 
-            <div>
-                Post query
+                <div>
+                    Post query
+                </div>
             </div>
-        </div>
 
             <footer class='footer navbar-fixed-bottom'>
                 <div class='row'>

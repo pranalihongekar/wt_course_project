@@ -11,45 +11,76 @@ function Login() {
         navigate('/Query');
         navigate(0);
     };
-    
+
 
     function Validate() {
         var tempUsername;
+
         axios.get("http://localhost:3002/api/get")
             .then(function (response) {
-                var username, password, x, y, status=1, i;
-
-                x = document.getElementById('username').value;
-                y = document.getElementById('password').value;
+                var loginStatus, USN, i, status = 0;
 
                 for (i = 0; i < response.data.length; i++) {
-                    username = response.data[i].USN;
-                    password = response.data[i].password;
+                    loginStatus = response.data[i].login_status;
 
-                    if (x == username && y == password) {
-                        status = 0;
-                        tempUsername=username;
+                    if (loginStatus == 1) {
+                        USN = response.data[i].USN;
+                        status = 1;
                     }
                 }
 
-                if (status == 0) {
-                    alert("Login successful.");
-                    navigateToQuery(); 
+                if (status == 1) {
+                    alert(USN+" user already logged in.");
+                    navigateToQuery();
                 }
 
                 else {
-                    alert("login failed. Invalid credentials.")
-                }
+                    axios.get("http://localhost:3002/api/get")
+                        .then(function (response) {
+                            var username, password, x, y, status = 1, i;
 
-                axios.post("http://localhost:3002/api/login",
-                {
-                    usn:tempUsername
-                })
-                .then(function (response) {
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                            x = document.getElementById('username').value;
+                            y = document.getElementById('password').value;
+
+                            for (i = 0; i < response.data.length; i++) {
+                                username = response.data[i].USN;
+                                password = response.data[i].password;
+
+                                if (x == username && y == password) {
+                                    status = 0;
+                                    tempUsername = username;
+                                }
+                            }
+
+                            if (status == 0) {
+                                alert("Login successful.");
+                                navigateToQuery();
+                            }
+
+                            else {
+                                alert("login failed. Invalid credentials.")
+                            }
+
+                            axios.post("http://localhost:3002/api/login",
+                                {
+                                    usn: tempUsername
+                                })
+                                .then(function (response) {
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                        .finally(function () {
+                            // always executed
+                        });
+
+                }
 
             })
             .catch(function (error) {
@@ -60,29 +91,30 @@ function Login() {
                 // always executed
             });
 
-            
+
+
 
     }
     return (
         <body>
-            <div class='bg-color2' style={{height:"80vh",}}>
-            <div>
-                <br/>
-                <h1>Login page:</h1>
-                <br/><br/>
-            </div>
-
-            <form onSubmit={Validate}>
-                <div className="form-group h4">
-                    <label>Username: </label>
-                    <input type='text' class="form-control" id='username' required/>
+            <div class='bg-color2' style={{ height: "80vh", }}>
+                <div>
                     <br />
-                    <label>Password: </label>
-                    <input type='password' class="form-control"  id='password' required/>
+                    <h1>Login page:</h1>
                     <br /><br />
-                    <input type='submit' value='Login' class='btn btn-default'/>
                 </div>
-            </form>
+
+                <form onSubmit={Validate}>
+                    <div className="form-group h4">
+                        <label>Username: </label>
+                        <input type='text' class="form-control" id='username' required />
+                        <br />
+                        <label>Password: </label>
+                        <input type='password' class="form-control" id='password' required />
+                        <br /><br />
+                        <input type='submit' value='Login' class='btn btn-default' />
+                    </div>
+                </form>
 
             </div>
             <footer class='footer navbar-fixed-bottom'>
