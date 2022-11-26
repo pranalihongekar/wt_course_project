@@ -45,7 +45,6 @@ function Login() {
                     usn:tempUsername
                 })
                 .then(function (response) {
-                    alert("Update executed");
                 })
                 .catch(function (error) {
                     console.log(error);

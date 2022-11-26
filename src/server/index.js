@@ -3,19 +3,20 @@ const db = require('./config/db')
 const cors = require('cors')
 
 const app = express();
-const  PORT = 3002;
+const PORT = 3002;
 app.use(cors());
 app.use(express.json())
 
-app.get("/api/get", (req,res)=>{
-    db.query("SELECT * FROM userDetails", (err,result)=>{
-        if(err) {
-        console.log(err)
-        } 
-    res.send(result)
-    });   });
+app.get("/api/get", (req, res) => {
+    db.query("SELECT * FROM userDetails", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.send(result)
+    });
+});
 
-app.post("/api/post", (req,res)=>{
+app.post("/api/post", (req, res) => {
     const usn = req.body.usn;
     const fname = req.body.fname;
     const lname = req.body.lname;
@@ -24,23 +25,25 @@ app.post("/api/post", (req,res)=>{
     const email = req.body.email;
 
 
-    db.query("INSERT INTO userDetails (USN, fname, lname, password, branch, email) VALUES (?,?,?,?,?,?)",[usn,fname,lname,password,branch,email], (err,result)=>{
-    if(err) {
-    console.log(err)
-    } 
-    console.log(result)
-});   });
+    db.query("INSERT INTO userDetails (USN, fname, lname, password, branch, email) VALUES (?,?,?,?,?,?)", [usn, fname, lname, password, branch, email], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
 
-app.post("/api/login", (req,res)=>{
+app.post("/api/login", (req, res) => {
     const usn = req.body.usn;
-    
-    db.query("update userDetails set login_status=1 where USN=?",[usn], (err,result)=>{
-    if(err) {
-    console.log(err)
-    } 
-    console.log(result)
-});   });
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on `,PORT)
+    db.query("update userDetails set login_status=1 where USN=?", [usn], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on `, PORT)
 })
