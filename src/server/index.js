@@ -31,6 +31,16 @@ app.post("/api/post", (req,res)=>{
     console.log(result)
 });   });
 
+app.post("/api/login", (req,res)=>{
+    const usn = req.body.usn;
+    
+    db.query("update userDetails set login_status=1 where USN=?",[usn], (err,result)=>{
+    if(err) {
+    console.log(err)
+    } 
+    console.log(result)
+});   });
+
 app.listen(PORT, ()=>{
     console.log(`Server is running on `,PORT)
 })

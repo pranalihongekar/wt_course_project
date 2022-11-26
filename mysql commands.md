@@ -5,7 +5,8 @@ fname varchar(30) not null,
 lname varchar(30) not null,
 password varchar(30) not null,
 branch varchar(30) not null,
-email varchar(50) unique not null
+email varchar(50) unique not null,
+login_status int(5) default 0
 );
 
 create table tag
