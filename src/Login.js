@@ -11,6 +11,7 @@ function Login() {
         navigate('/Query');
         navigate(0);
     };
+    
 
     function Validate() {
         var tempUsername;

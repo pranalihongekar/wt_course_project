@@ -31,14 +31,16 @@ class App extends Component {
               <div class='col-sm-6 h4'>
                 <h1>Community Website For Students</h1>
               </div>
-
+              
+              <nav>
               <div class='col-sm-3 h4' id='links'>
                 <br/><br/>
                 {/* <Button href="">Link</Button> <Button type="submit">Button</Button */}
-                <Link to="/Login">  Login  </Link><t/>
-                <Link to="/Register">  Signup  </Link>
-                <Link to="/About">  About us  </Link>
+                <Link activeClassName="activeItem" className="listItem" to="/Login">  Login  </Link><t/>
+                <Link activeClassName="activeItem" className="listItem" to="/Register">  Signup  </Link>
+                <Link activeClassName="activeItem" className="listItem" to="/About">  About us  </Link>
               </div>
+              </nav>
             </div>
             <Routes>
                   <Route exact path='/' element={< About />}></Route>

@@ -25,61 +25,16 @@
   position:fixed;
 }
 
-/*
 
-
- 
-.parent
-{
-  display: flex;
+.listItem{
+  color: white;
+  margin-left:2em ;
+  text-decoration: none;
+  font-size: 1.5rem;
 }
 
-.child1
-{
-  flex: 1;
+.activeItem{
+  color:darkorange;
+  border-bottom: .1em double #fff;
 }
 
-.child2
-{
-  flex: 2;
-  
-}
-
-.child3
-{
-  flex: 3;
-  margin-right: 20%;
-}
-
-h1
-{
-  text-align: center;
-  
-}
-
-
-
-label,.text
-{
-  
-  margin: 2%;
-  height:30px;
-  width: 30%;
-  font-size: 25px;
-  border-radius: 10px;
-  border: 1;
-}
-
-.button
-{
-  width: 80px;
-  height: 50px;
-  border-radius: 10px;
-}
-
-
-
-
-
-
- */
