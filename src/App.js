@@ -1,5 +1,5 @@
 import './App.css';
-
+import Button from 'react-bootstrap/Button'
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, Outlet } from 'react-router-dom';
 import axios from "axios";
@@ -33,10 +33,11 @@ class App extends Component {
               </div>
 
               <div class='col-sm-3 h4' id='links'>
-                <br/>
-                <Link to="/Login">Login</Link><br /><br />
-                <Link to="/Register">Signup</Link><br /><br />
-                <Link to="/About">About us</Link><br /><br />
+                <br/><br/>
+                {/* <Button href="">Link</Button> <Button type="submit">Button</Button */}
+                <Link to="/Login">  Login  </Link><t/>
+                <Link to="/Register">  Signup  </Link>
+                <Link to="/About">  About us  </Link>
               </div>
             </div>
             <Routes>

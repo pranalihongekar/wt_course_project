@@ -1,5 +1,16 @@
+# to-do:
+
+Query page 
+Article page 
+Profile page 
+Login validation 
+loading screen 
+internet issue
+
+
+
 # Getting Started with Create React App
-fff check
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
