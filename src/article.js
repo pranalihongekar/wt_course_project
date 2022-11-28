@@ -3,15 +3,27 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './article.css';
 import axios from "axios";
 import Query from './Query';
+import { tab } from '@testing-library/user-event/dist/tab';
 
-function article() {
+function Article() {
 
-    var data;
+    var i;
     axios.get("http://localhost:3002/api/article")
         .then(function (response) {
-            
-            data=response.data[0].articleHeading;
             console.log(response);
+            
+            // document.getElementById("articleHeading").innerHTML=response.data[0].articleHeading;
+            // document.getElementById("article").innerHTML=response.data[0].article;
+            var table = document.getElementById("table").getElementsByTagName('tbody')[0];
+            for(i=0;i<response.data.length;i++)
+            {
+                var newrow = table.insertRow();
+            var newcell = newrow.insertCell();
+            newcell.append(response.data[i].articleHeading);
+            var newrow = table.insertRow();
+            var newcell2 = newrow.insertCell();
+            newcell2.append(response.data[i].article);
+            }
         })
         .catch(function (error) {
             // handle error
@@ -33,10 +45,9 @@ function article() {
                     <h3>This is article page</h3>
                     <h4>Latest articles:</h4>
 
-                    <table>
-                        <th>
-                            {data}
-                        </th>
+                    <table border='1' id='table'>
+                        <tbody>
+                        </tbody>
                     </table>
 
 
@@ -53,4 +64,4 @@ function article() {
         </body >
     );
 }
-export default article;
+export default Article;
