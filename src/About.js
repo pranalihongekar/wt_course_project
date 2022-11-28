@@ -28,6 +28,7 @@ function About() {
             if (status == 1) {
                 alert("user already logged in." + USN);
                 navigateToArticle();
+
             }
         })
         .catch(function (error) {

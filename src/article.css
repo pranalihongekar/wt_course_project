@@ -12,3 +12,8 @@ table{
     width: 85vw;
     text-align: center;
 }
+
+thead
+{
+    font-weight: bold;
+}

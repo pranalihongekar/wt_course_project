@@ -11,18 +11,17 @@ function Article() {
     axios.get("http://localhost:3002/api/article")
         .then(function (response) {
             console.log(response);
-            
+
             // document.getElementById("articleHeading").innerHTML=response.data[0].articleHeading;
             // document.getElementById("article").innerHTML=response.data[0].article;
             var table = document.getElementById("table").getElementsByTagName('tbody')[0];
-            for(i=0;i<response.data.length;i++)
-            {
+            var thead = document.getElementById("table").getElementsByTagName('thead')[0];
+            for (i = 0; i < response.data.length; i++) {
                 var newrow = table.insertRow();
-            var newcell = newrow.insertCell();
-            newcell.append(response.data[i].articleHeading);
-            var newrow = table.insertRow();
-            var newcell2 = newrow.insertCell();
-            newcell2.append(response.data[i].article);
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].articleHeading);
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].article);
             }
         })
         .catch(function (error) {
@@ -45,7 +44,9 @@ function Article() {
                     <h3>This is article page</h3>
                     <h4>Latest articles:</h4>
 
-                    <table border='1' id='table'>
+                    <table border='1' id='table' class="table">
+                        <thead>
+                        </thead>
                         <tbody>
                         </tbody>
                     </table>
