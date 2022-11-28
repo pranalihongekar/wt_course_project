@@ -1,34 +1,17 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import './article.css';
 import axios from "axios";
-import './Query.css';
+import Query from './Query';
 
-function Query() {
+function article() {
 
-    let navigate = useNavigate();
-
-    const navigateToLogin = () => {
-        navigate('/login');
-        navigate(0);
-    };
-
-    axios.get("http://localhost:3002/api/get")
+    var data;
+    axios.get("http://localhost:3002/api/article")
         .then(function (response) {
-            var loginStatus, USN, i, status = 0;
-
-            for (i = 0; i < response.data.length; i++) {
-                loginStatus = response.data[i].login_status;
-
-                if (loginStatus == 1) {
-                    USN = response.data[i].USN;
-                    status = 1;
-                }
-            }
-            if(status==0)
-            {
-                navigateToLogin();
-                alert("Login to enter query page.");
-            }
+            
+            data=response.data[0].articleHeading;
+            console.log(response);
         })
         .catch(function (error) {
             // handle error
@@ -37,7 +20,6 @@ function Query() {
         .finally(function () {
             // always executed
         });
-
 
     return (
 
@@ -48,10 +30,18 @@ function Query() {
                     <Link activeClassName="activeItem" className="listItem" to="/query">  Queries  </Link>
                 </div>
                 <div class='col-sm-11'>
-                    Query page
+                    <h3>This is article page</h3>
+                    <h4>Latest articles:</h4>
+
+                    <table>
+                        <th>
+                            {data}
+                        </th>
+                    </table>
+
+
                 </div>
             </div>
-
             <footer class='footer navbar-fixed-bottom'>
                 <div class='row'>
                     <div class='col-sm-4'>Developed by: Sankalp, Soumya, Pranavi, Shri Nagahari</div>
@@ -63,4 +53,4 @@ function Query() {
         </body >
     );
 }
-export default Query;
+export default article;

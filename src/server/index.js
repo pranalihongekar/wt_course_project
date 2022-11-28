@@ -16,6 +16,16 @@ app.get("/api/get", (req, res) => {
     });
 });
 
+app.get("/api/article", (req, res) => {
+    db.query("SELECT * FROM article", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.send(result)
+    });
+});
+
+
 app.post("/api/post", (req, res) => {
     const usn = req.body.usn;
     const fname = req.body.fname;

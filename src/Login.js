@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigat
 import axios from "axios";
 import './Login.css';
 import Query from './Query';
+import Article from './article';
 
 function Login() {
     let navigate = useNavigate();
 
     const navigateToQuery = () => {
-        navigate('/Query');
+        navigate('/article');
         navigate(0);
     };
 
