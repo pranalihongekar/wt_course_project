@@ -12,6 +12,33 @@ import Article from './article';
 
 class App extends Component {
   render() {
+    var status=0,i,USN,loginStatus;
+    axios.get("http://localhost:3002/api/get")
+    .then(function (response) {
+
+        for (i = 0; i < response.data.length; i++) {
+            loginStatus = response.data[i].login_status;
+
+            if (loginStatus == 1) {
+                USN = response.data[i].USN;
+                status = 1;
+            }
+        }
+        if (status == 1) {
+          document.getElementById('links').style.visibility='hidden';
+        }
+        else
+        {
+          document.getElementById('links').style.visibility='visible';
+        }
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .finally(function () {
+        // always executed
+    });
 
     return (
       <html>

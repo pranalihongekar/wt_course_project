@@ -48,10 +48,12 @@ function Article() {
             // document.getElementById("articleHeading").innerHTML=response.data[0].articleHeading;
             // document.getElementById("article").innerHTML=response.data[0].article;
             var table = document.getElementById("table").getElementsByTagName('tbody')[0];
-            var thead = document.getElementById("table").getElementsByTagName('thead')[0];
-            for (i = 0; i < response.data.length; i++) {
+            
+            for (i = response.data.length-1; i >= 0; i--) {
                 var newrow = table.insertRow();
                 var newcell = newrow.insertCell();
+                newcell.append(response.data[i].user);
+                newcell.append(" - ");
                 newcell.append(response.data[i].articleHeading);
                 var newcell = newrow.insertCell();
                 newcell.append(response.data[i].article);
@@ -99,6 +101,7 @@ function Article() {
     return (
 
         <body>
+            {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/> */}
             <div class='row'>
                 <div class='col-sm-1'>
                     <Link activeClassName="activeItem" className="listItem" to="/article">  Articles  </Link>
@@ -122,8 +125,8 @@ function Article() {
                     <h4>Latest articles:</h4>
 
                     <table border='1' id='table' class="table">
-                        <thead>
-                        </thead>
+                        <th>Title</th>
+                        <th>Article</th>
                         <tbody>
                         </tbody>
                     </table>
