@@ -54,6 +54,30 @@ app.post("/api/login", (req, res) => {
     });
 });
 
+app.post("/api/logout",[], (req, res) => {
+
+    db.query("update userDetails set login_status=0 where login_status=1", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
+
+app.post("/api/publish", (req, res) => {
+    const usn = req.body.usn;
+    const articleHeading = req.body.articleHeading;
+    const article = req.body.article;
+
+
+    db.query("INSERT INTO article (articleHeading,article,user) VALUES (?,?,?)", [articleHeading,article,usn], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on `, PORT)
 })

@@ -38,6 +38,21 @@ function Query() {
             // always executed
         });
 
+        function Logout() {
+            axios.post("http://localhost:3002/api/logout",
+                    {                    
+                    })
+                    .then(function (response) {
+                        alert("Logout successful");
+                        navigateToLogin();
+                    })
+                    .catch(function (error) {
+                        alert("Try again.");
+                        console.log(error);
+                    });
+            
+            
+        }
 
     return (
 
@@ -45,7 +60,8 @@ function Query() {
             <div class='row'>
                 <div class='col-sm-1'>
                     <Link activeClassName="activeItem" className="listItem" to="/article">  Articles  </Link>
-                    <Link activeClassName="activeItem" className="listItem" to="/query">  Queries  </Link>
+                    <Link activeClassName="activeItem" className="listItem" to="/query">  Queries  </Link><br/><br/>
+                    <form onSubmit={Logout}><input type='submit' value='Logout' /></form>
                 </div>
                 <div class='col-sm-11'>
                     Query page
