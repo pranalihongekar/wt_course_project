@@ -112,9 +112,11 @@ function Article() {
                     <h4>Post an article:</h4>
 
                     <form onSubmit={Publish}>
+                        <br/>
                         <textarea id="articleHeading" rows="1" cols="100" placeholder="Article Heading"></textarea><br/>
-                        <textarea id="article" rows="4" cols="100" placeholder="Article"></textarea><br/>
+                        <textarea id="article" rows="4" cols="100" placeholder="Article"></textarea><br/><br/>
                         <input type='submit' value='Submit'/> 
+                        <br/><br/>
                     </form>
 
                     <h4>Latest articles:</h4>
