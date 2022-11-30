@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigat
 import axios from "axios";
 import './Login.css';
 import Query from './Query';
+import Article from './article';
 
 function Login() {
     let navigate = useNavigate();
 
     const navigateToQuery = () => {
-        navigate('/Query');
+        navigate('/article');
         navigate(0);
     };
 
@@ -18,7 +19,7 @@ function Login() {
 
         axios.get("http://localhost:3002/api/get")
             .then(function (response) {
-                var loginStatus, USN, i, status = 0;
+                var loginStatus, USN, i, status = 0, status1 = 1;
 
                 for (i = 0; i < response.data.length; i++) {
                     loginStatus = response.data[i].login_status;
@@ -47,21 +48,15 @@ function Login() {
                                 password = response.data[i].password;
 
                                 if (x == username && y == password) {
-                                    status = 0;
+                                    status1 = 0;
                                     tempUsername = username;
                                 }
                             }
 
-                            if (status == 0) {
+                            if (status1 == 0) {
                                 alert("Login successful.");
-                                navigateToQuery();
-                            }
 
-                            else {
-                                alert("login failed. Invalid credentials.")
-                            }
-
-                            axios.post("http://localhost:3002/api/login",
+                                axios.post("http://localhost:3002/api/login",
                                 {
                                     usn: tempUsername
                                 })
@@ -71,6 +66,13 @@ function Login() {
                                     console.log(error);
                                 });
 
+                                navigateToQuery();
+                            }
+
+                            else {
+                                alert("login failed. Invalid credentials.")
+                            }
+                            
                         })
                         .catch(function (error) {
                             // handle error
@@ -90,10 +92,6 @@ function Login() {
             .finally(function () {
                 // always executed
             });
-
-
-
-
     }
     return (
         <body>

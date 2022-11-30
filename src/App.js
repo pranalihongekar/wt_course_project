@@ -8,9 +8,37 @@ import About from './About';
 import Login from './Login';
 import Register from './Register';
 import Query from './Query';
+import Article from './article';
 
 class App extends Component {
   render() {
+    var status=0,i,USN,loginStatus;
+    axios.get("http://localhost:3002/api/get")
+    .then(function (response) {
+
+        for (i = 0; i < response.data.length; i++) {
+            loginStatus = response.data[i].login_status;
+
+            if (loginStatus == 1) {
+                USN = response.data[i].USN;
+                status = 1;
+            }
+        }
+        if (status == 1) {
+          document.getElementById('links').style.visibility='hidden';
+        }
+        else
+        {
+          document.getElementById('links').style.visibility='visible';
+        }
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .finally(function () {
+        // always executed
+    });
 
     return (
       <html>
@@ -35,8 +63,7 @@ class App extends Component {
               <nav>
               <div class='col-sm-3 h4' id='links'>
                 <br/><br/>
-                {/* <Button href="">Link</Button> <Button type="submit">Button</Button */}
-                <Link activeClassName="activeItem" className="listItem" to="/Login">  Login  </Link><t/>
+                <Link activeClassName="activeItem" className="listItem" to="/Login">  Login  </Link>
                 <Link activeClassName="activeItem" className="listItem" to="/Register">  Signup  </Link>
                 <Link activeClassName="activeItem" className="listItem" to="/About">  About us  </Link>
               </div>
@@ -48,6 +75,7 @@ class App extends Component {
                   <Route exact path='/about' element={< About />}></Route>
                   <Route exact path='/register' element={< Register />}></Route>
                   <Route exact path='/query' element={< Query />}></Route>
+                  <Route exact path='/article' element={< Article />}></Route>
                 </Routes>
             </Router>
             </div>

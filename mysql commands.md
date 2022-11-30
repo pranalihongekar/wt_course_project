@@ -39,7 +39,8 @@ foreign key (qId) references questions(qId)
 
 create table article
 (
-articleId int(30) primary key,
+articleId int(30) primary key auto_increment,
+articleHeading varchar(30),
 article varchar(1024),
 user varchar(30),
 foreign key (user) references userDetails(USN)

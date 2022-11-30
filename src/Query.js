@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import './Login.css';
+import './Query.css';
 
 function Query() {
 
@@ -38,19 +38,33 @@ function Query() {
             // always executed
         });
 
+        function Logout() {
+            axios.post("http://localhost:3002/api/logout",
+                    {                    
+                    })
+                    .then(function (response) {
+                        alert("Logout successful");
+                        navigateToLogin();
+                    })
+                    .catch(function (error) {
+                        alert("Try again.");
+                        console.log(error);
+                    });
+            
+            
+        }
 
     return (
 
         <body>
-            <h2>This is Query page</h2>
-
-            <div >
-                <div>
-                    Select categories
+            <div class='row'>
+                <div class='col-sm-1'>
+                    <Link activeClassName="activeItem" className="listItem" to="/article">  Articles  </Link>
+                    <Link activeClassName="activeItem" className="listItem" to="/query">  Queries  </Link><br/><br/>
+                    <form onSubmit={Logout}><input type='submit' value='Logout' /></form>
                 </div>
-
-                <div>
-                    Post query
+                <div class='col-sm-11'>
+                    Query page
                 </div>
             </div>
 

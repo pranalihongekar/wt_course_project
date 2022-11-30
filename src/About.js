@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './Login.css';
+import article from './article';
 
 function About() {
     let navigate = useNavigate();
 
-    const navigateToQuery = () => {
-        navigate('/Query');
+    const navigateToArticle = () => {
+        navigate('/Article');
         navigate(0);
     };
 
@@ -26,7 +27,8 @@ function About() {
 
             if (status == 1) {
                 alert("user already logged in." + USN);
-                navigateToQuery();
+                navigateToArticle();
+
             }
         })
         .catch(function (error) {

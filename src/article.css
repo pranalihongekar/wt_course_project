@@ -1,0 +1,25 @@
+.listItem{
+    color: rgb(0, 0, 0);
+}
+
+.col-sm-1
+{
+    background-color: blanchedalmond;
+    height: 100vh;
+}
+
+table{
+    width: 85vw;
+    text-align: center;
+}
+
+thead
+{
+    font-weight: bold;
+    visibility: ;
+}
+
+form
+{
+    height: auto;
+}
