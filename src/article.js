@@ -104,8 +104,9 @@ function Article() {
             {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/> */}
             <div class='row'>
                 <div class='col-sm-1'>
-                    <Link activeClassName="activeItem" className="listItem" to="/article">  Articles  </Link>
-                    <Link activeClassName="activeItem" className="listItem" to="/query">  Queries  </Link>
+                <br/>
+                    <Link activeClassName="activeItem" className="listItem" to="/article">Articles</Link><br/><br/> 
+                    <Link activeClassName="activeItem" className="listItem" to="/query">Queries</Link><br/>
                     <br/><br/>
                     <form onSubmit={Logout}><input type='submit' value='Logout' /></form>
                 </div>

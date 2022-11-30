@@ -10,7 +10,7 @@
 
 .bg-color
 {
-  background-color:rgb(241, 108, 31);
+  background-color:#89CFF0;
 }
 
 .bg-color2
@@ -21,7 +21,7 @@
 .footer
 {
   font-size: 20px;
-  background-color: coral;
+  background-color: #89CFF0;
   position:fixed;
 }
 

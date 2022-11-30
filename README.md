@@ -1,12 +1,11 @@
 # to-do:
 
 Query page 
-Article page 
-Profile page 
-Login validation 
 loading screen 
-internet issue
-
+internet issues
+Likes - articles,queries
+trending article based on likes.
+admin page.
 
 
 # Getting Started with Create React App

@@ -4,8 +4,9 @@
 
 .col-sm-1
 {
-    background-color: blanchedalmond;
+    background-color:#c3cfd6;
     height: 100vh;
+    border-radius: 10px;
 }
 
 table{
@@ -16,10 +17,20 @@ table{
 thead
 {
     font-weight: bold;
-    visibility: ;
+    /* visibility: ; */
 }
 
 form
 {
     height: auto;
+}
+
+body
+{
+    background-color: azure;
+}
+
+.activeItem
+{
+    border: 1px;
 }
