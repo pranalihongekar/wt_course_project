@@ -101,7 +101,7 @@ function Article() {
     return (
 
         <body>
-            {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/> */}
+            {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>  */}
             <div class='row'>
                 <div class='col-sm-1'>
                 <br/>
@@ -125,7 +125,7 @@ function Article() {
 
                     <h4>Latest articles:</h4>
 
-                    <table border='1' id='table' class="table">
+                    <table border='1' id='table' class="table table-dark">
                         <th>Title</th>
                         <th>Article</th>
                         <tbody>

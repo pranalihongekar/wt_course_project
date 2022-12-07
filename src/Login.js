@@ -110,7 +110,7 @@ function Login() {
                         <label>Password: </label>
                         <input type='password' class="form-control" id='password' required />
                         <br /><br />
-                        <input type='submit' value='Login' class='btn btn-default' />
+                        <input type='submit' value='Login' class='btn btn-default' id="submit"/>
                     </div>
                 </form>
 

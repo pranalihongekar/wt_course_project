@@ -6,7 +6,8 @@ lname varchar(30) not null,
 password varchar(30) not null,
 branch varchar(30) not null,
 email varchar(50) unique not null,
-login_status int(5) default 0
+login_status int(5) default 0,
+is_admin varchar(30)
 );
 
 create table tag
@@ -23,6 +24,7 @@ question varchar(1000),
 user varchar(30),
 tagId int(30) not null,
 primary key(qId),
+date varchar(40),
 foreign key (user) references userDetails(USN),
 foreign key (tagId) references tag(tagId)
 );
@@ -33,6 +35,7 @@ aId int(30) primary key,
 user varchar(30), 
 answer varchar(10000),
 qId int(30),
+date varchar(40),
 foreign key (user) references userDetails(USN),
 foreign key (qId) references questions(qId)
 );
@@ -43,6 +46,7 @@ articleId int(30) primary key auto_increment,
 articleHeading varchar(30),
 article varchar(1024),
 user varchar(30),
+date varchar(40),
 foreign key (user) references userDetails(USN)
 );
 
