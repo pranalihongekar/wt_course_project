@@ -9,6 +9,7 @@ import Login from './Login';
 import Register from './Register';
 import Query from './Query';
 import Article from './article';
+import Admin from './Admin';
 
 class App extends Component {
   render() {
@@ -76,6 +77,7 @@ class App extends Component {
                   <Route exact path='/register' element={< Register />}></Route>
                   <Route exact path='/query' element={< Query />}></Route>
                   <Route exact path='/article' element={< Article />}></Route>
+                  <Route exact path='/admin' element={< Admin />}></Route>
                 </Routes>
             </Router>
             </div>

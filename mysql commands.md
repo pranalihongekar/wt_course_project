@@ -47,6 +47,7 @@ articleHeading varchar(30),
 article varchar(1024),
 user varchar(30),
 date varchar(40),
+likes int(30) default 0,
 foreign key (user) references userDetails(USN)
 );
 

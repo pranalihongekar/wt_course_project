@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './Login.css';
-import Query from './Query';
-import Article from './article';
+
 
 function Login() {
     let navigate = useNavigate();
@@ -102,7 +101,7 @@ function Login() {
                     <br /><br />
                 </div>
 
-                <form onSubmit={Validate}>
+                <form onSubmit={Validate} class='form2'>
                     <div className="form-group h4">
                         <label>Username: </label>
                         <input type='text' class="form-control" id='username' required />

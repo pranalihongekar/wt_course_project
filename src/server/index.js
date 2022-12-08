@@ -25,6 +25,14 @@ app.get("/api/article", (req, res) => {
     });
 });
 
+app.get("/api/displayQuestions", (req, res) => {
+    db.query("SELECT * FROM questions", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.send(result)
+    });
+});
 
 app.post("/api/post", (req, res) => {
     const usn = req.body.usn;
@@ -68,9 +76,41 @@ app.post("/api/publish", (req, res) => {
     const usn = req.body.usn;
     const articleHeading = req.body.articleHeading;
     const article = req.body.article;
+    const date = req.body.date;
 
+    db.query("INSERT INTO article (articleHeading,article,user,date) VALUES (?,?,?,?)", [articleHeading,article,usn,date], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
 
-    db.query("INSERT INTO article (articleHeading,article,user) VALUES (?,?,?)", [articleHeading,article,usn], (err, result) => {
+app.post("/api/removeUser", (req, res) => {
+    const usn = req.body.usn;
+
+    db.query("delete from userDetails where USN=(?)", [usn], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+
+    db.query("delete from articles where user=(?)", [usn], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
+
+app.post("/api/question", (req, res) => {
+    const question = req.body.question;
+    const usn = req.body.usn;
+    const date = req.body.date;
+    const tag = req.body.tag;
+
+    db.query("INSERT INTO questions (question,user,tagId,date) VALUES (?,?,?,?)", [question,usn,tag,date], (err, result) => {
         if (err) {
             console.log(err)
         }

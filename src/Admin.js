@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import './Query.css';
-import Admin from './Admin';
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+import './Admin.css';
 
-function Query() {
-
+function Admin() {
     let navigate = useNavigate();
-    var loginStatus, USN, i, status = 0, admin = 0, is_admin;
 
     const navigateToLogin = () => {
         navigate('/login');
@@ -18,6 +13,7 @@ function Query() {
 
     axios.get("http://localhost:3002/api/get")
         .then(function (response) {
+            var loginStatus, USN, i, status = 0, admin = 0, is_admin;
 
             for (i = 0; i < response.data.length; i++) {
                 loginStatus = response.data[i].login_status;
@@ -67,55 +63,35 @@ function Query() {
             });
     }
 
-    function Ask() {
-        let newDate = new Date()
-        let date = newDate.getDate();
-        let month = newDate.getMonth() + 1;
-        let year = newDate.getFullYear();
+    var tempUSN;
 
-        var fulldate = date + "-" + month + "-" + year;
-
-        axios.post("http://localhost:3002/api/question",
-            {
-                question: document.getElementById('question').value,
-                usn: USN,
-                tag: "1",
-                date: fulldate
-            })
-            .then(function (response) {
-                alert("Article added.");
-            })
-            .catch(function (error) {
-                alert("Error. try again.");
-                console.log(error);
-            });
-    }
-
-    axios.get("http://localhost:3002/api/displayQuestions")
+    axios.get("http://localhost:3002/api/get")
         .then(function (response) {
             console.log(response);
 
-            // document.getElementById("articleHeading").innerHTML=response.data[0].articleHeading;
-            // document.getElementById("article").innerHTML=response.data[0].article;
             var table = document.getElementById("table").getElementsByTagName('tbody')[0];
-
+            var i;
             for (i = response.data.length - 1; i >= 0; i--) {
                 var newrow = table.insertRow();
                 var newcell = newrow.insertCell();
-                newcell.append(response.data[i].qId);
+                newcell.append(response.data[i].USN);
                 var newcell = newrow.insertCell();
-                newcell.append(response.data[i].user);
+                newcell.append(response.data[i].fname);
                 var newcell = newrow.insertCell();
-                newcell.append(response.data[i].date);
+                newcell.append(response.data[i].lname);
                 var newcell = newrow.insertCell();
-                newcell.append(response.data[i].question);
-                //var newcell = newrow.insertCell();
-                // var tBox = document.createElement('input');
-                // tBox.setAttribute('type', 'submit');
-                // tBox.setAttribute('value', response.data[i].qId);
-                // tBox.setAttribute('id', 'Answer');
-                // newcell.append(tBox);
+                newcell.append(response.data[i].branch);
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].email);
+                var newcell = newrow.insertCell();
+                var tBox = document.createElement('input');
+                    tBox.setAttribute('type', 'submit');
+                    tBox.setAttribute('value', response.data[i].USN);
+                    tBox.setAttribute('id', 'removeUser');
+                newcell.append(tBox);
             }
+
+            tempUSN = document.getElementById('removeUser').value;
         })
         .catch(function (error) {
             // handle error
@@ -125,55 +101,49 @@ function Query() {
             // always executed
         });
 
-    function Answer() {
+        
 
+    function RemoveUser() {
+
+        
+        alert(tempUSN);
+        axios.post("http://localhost:3002/api/removeUser",
+                {
+                    usn:tempUSN
+                })
+                .then(function (response) {
+                    alert("User Removed");
+                })
+                .catch(function (error) {
+                    alert("Error. try again.");
+                    console.log(error);
+                });
     }
 
     return (
-
         <body>
             <div class='row'>
-                <div class='col-sm-1'>
-                    <br />
-                    <Link activeClassName="activeItem" className="listItem" to="/article">  Articles  </Link><br /> <br />
-                    <Link activeClassName="activeItem" className="listItem" to="/query">  Queries  </Link><br /><br />
+            <div class='col-sm-1'>
+                <br/>
+                    <Link activeClassName="activeItem" className="listItem" to="/article">Articles</Link><br/><br/> 
+                    <Link activeClassName="activeItem" className="listItem" to="/query">Queries</Link><br/><br/> 
                     <Link activeClassName="activeItem" className="listItem" id="admin" to="/admin">  Admin page </Link><br /><br />
                     <form onSubmit={Logout}><input type='submit' value='Logout' /></form>
                 </div>
                 <div class='col-sm-11'>
                     <div>
-                        <h4>Queries:</h4>
-
-                        <h4>Ask a question:</h4>
-
-                        <form onSubmit={Ask}>
-                            <textarea id="question" rows="1" cols="100" placeholder="Question" required></textarea><br />
-                            <input type='submit' value='Submit' />
-                        </form>
-
-                        Questions:
-                        <form onSubmit={Answer}>
-                            <table border='1' id='table' class="table table-dark">
-                                <th>Question Id</th>
-                                <th>Username</th>
-                                <th>Date asked</th>
-                                <th>Question</th>
+                        <h4>List of registered users:</h4><br />
+                        <form onSubmit={RemoveUser}>
+                            <table border='1' id='table'>
+                                <th>USN</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Branch</th>
+                                <th>Email</th>
+                                <th>Remove user</th>
                                 <tbody>
                                 </tbody>
                             </table>
-                        </form>
-
-                    </div>
-
-                    <div>
-                        Answer:
-
-                        <form onSubmit={Answer}>
-                            <input type='text' id='qId' placeholder='Enter question id'/>
-                            <br/>
-                            <textarea id="article" rows="4" cols="100" placeholder="Answer" required></textarea><br /><br />
-
-                            <input type='submit' value='Answer'/>
                         </form>
                     </div>
                 </div>
@@ -187,7 +157,8 @@ function Query() {
                 </div>
 
             </footer>
-        </body >
+
+        </body>
     );
 }
-export default Query;
+export default Admin;
