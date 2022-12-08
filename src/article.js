@@ -52,8 +52,10 @@ function Article() {
             for (i = response.data.length - 1; i >= 0; i--) {
                 var newrow = table.insertRow();
                 var newcell = newrow.insertCell();
+                newcell.append(response.data[i].articleId);
+                var newcell = newrow.insertCell();
                 newcell.append(response.data[i].user);
-                newcell.append(" - ");
+                var newcell = newrow.insertCell();
                 newcell.append(response.data[i].articleHeading);
                 var newcell = newrow.insertCell();
                 newcell.append(response.data[i].article);
@@ -148,13 +150,15 @@ function Article() {
                         <br />
                         <textarea id="articleHeading" rows="1" cols="100" placeholder="Article Heading" required></textarea><br />
                         <textarea id="article" rows="4" cols="100" placeholder="Article" required></textarea><br /><br />
-                        <input type='submit' value='Submit' />
+                        <input type='submit' value='Submit' id='submit' />
                         <br /><br />
                     </form>
 
                     <h4>Latest articles:</h4>
 
                     <table border='1' id='table' class="table table-dark">
+                        <th>Article id</th>
+                        <th>Posted by</th>
                         <th>Title</th>
                         <th>Article</th>
                         <tbody>

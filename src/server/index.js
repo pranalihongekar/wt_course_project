@@ -102,6 +102,20 @@ app.post("/api/removeUser", (req, res) => {
         }
         console.log(result)
     });
+
+    db.query("delete from questions where user=(?)", [usn], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+
+    db.query("delete from answers where user=(?)", [usn], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
 });
 
 app.post("/api/question", (req, res) => {
@@ -111,6 +125,42 @@ app.post("/api/question", (req, res) => {
     const tag = req.body.tag;
 
     db.query("INSERT INTO questions (question,user,tagId,date) VALUES (?,?,?,?)", [question,usn,tag,date], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
+
+app.post("/api/answer", (req, res) => {
+    const answer = req.body.answer;
+    const usn = req.body.usn;
+    const date = req.body.date;
+    const qId = req.body.qId;
+
+    db.query("INSERT INTO answers (user,answer,qId,date) VALUES (?,?,?,?)", [answer,usn,qId,date], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
+
+app.post("/api/deleteQuestion", (req, res) => {
+    const qId = req.body.qId;
+
+    db.query("delete from questions where qId = (?) ", [qId], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result)
+    });
+});
+
+app.post("/api/deleteArticle", (req, res) => {
+    const articleId = req.body.articleId;
+
+    db.query("delete from article where articleId = (?) ", [articleId], (err, result) => {
         if (err) {
             console.log(err)
         }

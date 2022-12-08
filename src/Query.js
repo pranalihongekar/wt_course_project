@@ -126,7 +126,27 @@ function Query() {
         });
 
     function Answer() {
+        let newDate = new Date()
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
 
+        var fulldate = date + "-" + month + "-" + year;
+
+        axios.post("http://localhost:3002/api/answer",
+            {
+                answer: document.getElementById('answer').value,
+                usn: USN,
+                qId: document.getElementById('qId').value,
+                date: fulldate
+            })
+            .then(function (response) {
+                alert("Article added.");
+            })
+            .catch(function (error) {
+                alert("Error. try again.");
+                console.log(error);
+            });
     }
 
     return (
@@ -171,7 +191,7 @@ function Query() {
                         <form onSubmit={Answer}>
                             <input type='text' id='qId' placeholder='Enter question id'/>
                             <br/>
-                            <textarea id="article" rows="4" cols="100" placeholder="Answer" required></textarea><br /><br />
+                            <textarea id="answer" rows="4" cols="100" placeholder="Answer" required></textarea><br /><br />
 
                             <input type='submit' value='Answer'/>
                         </form>

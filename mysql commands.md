@@ -31,7 +31,7 @@ foreign key (tagId) references tag(tagId)
 
 create table answers
 (
-aId int(30) primary key,
+aId int(30) primary key auto_increment,
 user varchar(30), 
 answer varchar(10000),
 qId int(30),

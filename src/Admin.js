@@ -64,6 +64,8 @@ function Admin() {
     }
 
     var tempUSN;
+    var tempqId;
+    var temparticleId ;
 
     axios.get("http://localhost:3002/api/get")
         .then(function (response) {
@@ -85,9 +87,9 @@ function Admin() {
                 newcell.append(response.data[i].email);
                 var newcell = newrow.insertCell();
                 var tBox = document.createElement('input');
-                    tBox.setAttribute('type', 'submit');
-                    tBox.setAttribute('value', response.data[i].USN);
-                    tBox.setAttribute('id', 'removeUser');
+                tBox.setAttribute('type', 'submit');
+                tBox.setAttribute('value', response.data[i].USN);
+                tBox.setAttribute('id', 'removeUser');
                 newcell.append(tBox);
             }
 
@@ -101,32 +103,62 @@ function Admin() {
             // always executed
         });
 
-        
+
 
     function RemoveUser() {
 
-        
+
         alert(tempUSN);
         axios.post("http://localhost:3002/api/removeUser",
-                {
-                    usn:tempUSN
-                })
-                .then(function (response) {
-                    alert("User Removed");
-                })
-                .catch(function (error) {
-                    alert("Error. try again.");
-                    console.log(error);
-                });
+            {
+                usn: tempUSN
+            })
+            .then(function (response) {
+                alert("User Removed");
+            })
+            .catch(function (error) {
+                alert("Error. try again.");
+                console.log(error);
+            });
+    }
+
+    function DeleteQuestion()
+    {
+        axios.post("http://localhost:3002/api/deleteQuestion",
+            {
+                qId:document.getElementById('qId').value
+            })
+            .then(function (response) {
+                alert("Question Removed");
+            })
+            .catch(function (error) {
+                alert("Error. try again.");
+                console.log(error);
+            });
+    }
+
+    function DeleteArticle()
+    {
+        axios.post("http://localhost:3002/api/deleteArticle",
+            {
+                articleId:document.getElementById('articleId').value
+            })
+            .then(function (response) {
+                alert("Article Removed");
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert("Error. try again.");
+            });
     }
 
     return (
         <body>
             <div class='row'>
-            <div class='col-sm-1'>
-                <br/>
-                    <Link activeClassName="activeItem" className="listItem" to="/article">Articles</Link><br/><br/> 
-                    <Link activeClassName="activeItem" className="listItem" to="/query">Queries</Link><br/><br/> 
+                <div class='col-sm-1'>
+                    <br />
+                    <Link activeClassName="activeItem" className="listItem" to="/article">Articles</Link><br /><br />
+                    <Link activeClassName="activeItem" className="listItem" to="/query">Queries</Link><br /><br />
                     <Link activeClassName="activeItem" className="listItem" id="admin" to="/admin">  Admin page </Link><br /><br />
                     <form onSubmit={Logout}><input type='submit' value='Logout' /></form>
                 </div>
@@ -146,6 +178,18 @@ function Admin() {
                             </table>
                         </form>
                     </div>
+
+                    <h4>Delete article:</h4>
+                    <form onSubmit={DeleteArticle}>
+                        <input type='text' id='articleId' placeholder='Enter article Id' required />
+                        <input type='submit' id='submit' value='delete' />
+                    </form>
+
+                    <h4>Delete Question:</h4>
+                    <form onSubmit={DeleteQuestion}>
+                        <input type='text' id='qId' placeholder='Enter Question Id' required />
+                        <input type='submit' id='submit' value='delete' />
+                    </form>
                 </div>
             </div>
 

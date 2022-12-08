@@ -78,7 +78,7 @@ function Register() {
                         <label>Email id: </label>
                         <input type='text' class="form-control" id='email' required />
                         <br /><br />
-                        <input type='submit' value='Signup' class='btn btn-default' />
+                        <input type='submit' value='Signup' class='btn btn-default' id='submit'/>
                         <br /><br /><br /><br /><br /><br />
                     </div>
                 </form>
