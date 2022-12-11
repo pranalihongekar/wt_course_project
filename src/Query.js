@@ -149,6 +149,42 @@ function Query() {
             });
     }
 
+    axios.get("http://localhost:3002/api/displayAnswers")
+        .then(function (response) {
+            console.log(response);
+
+            // document.getElementById("articleHeading").innerHTML=response.data[0].articleHeading;
+            // document.getElementById("article").innerHTML=response.data[0].article;
+            var table = document.getElementById("table2").getElementsByTagName('tbody')[0];
+
+            for (i = response.data.length - 1; i >= 0; i--) {
+                var newrow = table.insertRow();
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].aId);
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].user);
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].date);
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].qId);
+                var newcell = newrow.insertCell();
+                newcell.append(response.data[i].answer);
+                //var newcell = newrow.insertCell();
+                // var tBox = document.createElement('input');
+                // tBox.setAttribute('type', 'submit');
+                // tBox.setAttribute('value', response.data[i].qId);
+                // tBox.setAttribute('id', 'Answer');
+                // newcell.append(tBox);
+            }
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .finally(function () {
+            // always executed
+        });
+
     return (
 
         <body>
@@ -189,12 +225,26 @@ function Query() {
                         Answer:
 
                         <form onSubmit={Answer}>
-                            <input type='text' id='qId' placeholder='Enter question id'/>
-                            <br/>
+                            <input type='text' id='qId' placeholder='Enter question id' />
+                            <br />
                             <textarea id="answer" rows="4" cols="100" placeholder="Answer" required></textarea><br /><br />
 
-                            <input type='submit' value='Answer'/>
+                            <input type='submit' value='Answer' />
                         </form>
+                    </div>
+
+                    <div>
+                        Answers:
+
+                        <table border='1' id='table2' class="table table-dark">
+                            <th>Answer Id</th>
+                            <th>Username</th>
+                            <th>Date answered</th>
+                            <th>Question Id</th>
+                            <th>Answer</th>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

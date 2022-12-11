@@ -34,6 +34,26 @@ app.get("/api/displayQuestions", (req, res) => {
     });
 });
 
+app.get("/api/displayAnswers", (req, res) => {
+    db.query("SELECT * FROM answers", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.send(result)
+    });
+});
+
+app.get("/api/editArticle",(req, res) => {
+    const articleId = req.body.articleId;
+    const article = req.body.article;
+    db.query("update article set article=(?) where articleId = (?)",[article,articleId], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.send(result)
+    });
+});
+
 app.post("/api/post", (req, res) => {
     const usn = req.body.usn;
     const fname = req.body.fname;
@@ -138,7 +158,7 @@ app.post("/api/answer", (req, res) => {
     const date = req.body.date;
     const qId = req.body.qId;
 
-    db.query("INSERT INTO answers (user,answer,qId,date) VALUES (?,?,?,?)", [answer,usn,qId,date], (err, result) => {
+    db.query("INSERT INTO answers (user,answer,qId,date) VALUES (?,?,?,?)", [usn,answer,qId,date], (err, result) => {
         if (err) {
             console.log(err)
         }

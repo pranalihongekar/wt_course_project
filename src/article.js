@@ -8,7 +8,7 @@ import { tab } from '@testing-library/user-event/dist/tab';
 function Article() {
 
     var i;
-    var loginStatus, USN, i, status = 0;
+    var loginStatus, USN, i, status = 0, admin = 0, is_admin;
 
     let navigate = useNavigate();
 
@@ -26,11 +26,22 @@ function Article() {
                 if (loginStatus == 1) {
                     USN = response.data[i].USN;
                     status = 1;
+                    is_admin = response.data[i].is_admin;
+                }
+                if (is_admin == 'yes' || is_admin == 'Yes') {
+                    admin = 1;
                 }
             }
             if (status == 0) {
                 navigateToLogin();
                 alert("Login to enter query page.");
+            }
+            if (admin == 1) {
+                document.getElementById("admin").style.visibility = 'visible';
+            }
+
+            else {
+                document.getElementById("admin").style.visibility = 'hidden';
             }
         })
         .catch(function (error) {
@@ -90,7 +101,7 @@ function Article() {
         let year = newDate.getFullYear();
 
         var fulldate = date + "-" + month + "-" + year;
-        var count=1;
+        var count = 1;
 
         axios.get("http://localhost:3002/api/article")
             .then(function (response) {
@@ -129,6 +140,31 @@ function Article() {
     }
 
 
+
+    function editArticle() {
+        var tempArticleId = document.getElementById('articleId').value;
+        var tempArticle2 = document.getElementById('article2').value;
+        axios.get("http://localhost:3002/api/editArticle",
+            {
+
+
+                articleId: tempArticleId,
+                article: tempArticle2
+            })
+            .then(function (response) {
+                alert("Article updated.");
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+    }
+
+
+
     return (
 
         <body>
@@ -164,6 +200,16 @@ function Article() {
                         <tbody>
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    <h4>Edit article:</h4>
+                    <h4>Enter article number:</h4>
+                    <form onSubmit={editArticle}>
+                        <input type='text' id='articleId' placeholder='Enter article id:' required />
+                        <textarea id="article2" rows="4" cols="100" placeholder="Enter new content" required></textarea><br /><br />
+                        <input type='submit' value='Edit' id='submit' />
+                    </form>
+
                 </div>
             </div>
             <footer class='footer navbar-fixed-bottom'>
